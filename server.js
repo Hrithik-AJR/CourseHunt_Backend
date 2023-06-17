@@ -7,6 +7,15 @@ import { Stats } from "./models/stats.js";
 
 connectDB();
 
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) 
+
 cloudinary.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_CLOUD_API,
