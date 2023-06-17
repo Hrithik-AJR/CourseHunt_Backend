@@ -3,7 +3,7 @@ import {config} from "dotenv"
 import cookieParser from "cookie-parser";
 
 config({
-    path:"./config/config.env"
+    path:"./config.env"
 })
 const app=express();
 app.use(express.json());
