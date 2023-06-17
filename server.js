@@ -4,10 +4,9 @@ import cloudinary from "cloudinary";
 import Razorpay from "razorpay"
 import nodeCron from "node-cron";
 import { Stats } from "./models/stats.js";
-
+import cors from "cors"
 connectDB();
 
-const cors=require("cors");
 const corsOptions ={
    origin:'*', 
    credentials:true,
