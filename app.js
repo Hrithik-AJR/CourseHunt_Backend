@@ -19,6 +19,22 @@ import payment from "./routes/paymentroutes.js"
 import other from "./routes/otherroutes.js"
 import ErrorMiddleware from "./middlewares/error.js";
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 app.use("/api/v1",course);
 app.use("/api/v1",user);
 app.use("/api/v1",payment);

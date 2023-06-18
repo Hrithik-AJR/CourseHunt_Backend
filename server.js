@@ -4,16 +4,27 @@ import cloudinary from "cloudinary";
 import Razorpay from "razorpay"
 import nodeCron from "node-cron";
 import { Stats } from "./models/stats.js";
-import cors from "cors"
+
 connectDB();
 
-const corsOptions ={
-   origin:'*', 
-   credentials:true,
-   optionSuccessStatus:200,
-}
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-app.use(cors(corsOptions)) 
+  // Handle preflight requests
+  console.log('Received request:', req.method, req.url);
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 cloudinary.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

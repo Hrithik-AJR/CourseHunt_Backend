@@ -8,6 +8,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
+  "proxy": {
+    "*":{ "target" : "http://localhost:3000"}
+ } ,
   "author": "",
   "license": "ISC",
   "dependencies": {
